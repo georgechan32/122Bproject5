@@ -1,0 +1,30 @@
+<!doctype html>
+<head>
+	<meta charset="utf-8">
+	<title>122B Project5</title>
+	<meta name="description" content="My Parse App">
+	<meta name="viewport" content="width=device-width">
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link rel="stylesheet" href="css/button.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+	
+	<script type="text/javascript" src="https://www.parsecdn.com/js/parse-1.2.18.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div id= "showTime">--</div>
+	<div id= "score">--</div>
+	<button type="button" class="btn btn-xlarge btn-link" id = "startBtn" onclick = "prepGame()">FabQuiz</button>
+	<div id = "pauseMenu">Game Paused</div>
+	<div id = "nav">
+		<button type="button" class="btn btn-nav-small btn-link" onclick = "pauseGame()" id = "gamePause">ll</button>
+	</div>
+	<script type="text/javascript" src="script.js"></script> 
+</body>
+
+</html>
