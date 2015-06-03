@@ -335,12 +335,15 @@ function question6()
 
 function question7()
 {
+
 	var splitted = question7Arr[0].split("|");
+	console.log(question7Arr[0]);
 	var choiceBtns = [];
 	var correctChoices = ["Evelyn Lynn", "Jessica Valentine", "Sam Raimi", "Jennifer Lawrence", "Peter Parker", "Lana Del Ray", "Taylor Swift", "Hatsune Miku"];
 	for(var i = 0; i < 4; i++)
 	{
-		if(i + 1 < splitted.length)
+		console.log("CHOICES: "+ splitted[i+1]);
+		if(i + 1 < splitted.length && splitted[i+1] != "" && splitted[i+1] != undefined)
 		{
 			choiceBtns.push(createBtns(splitted[i+1], false));
 		}
@@ -349,16 +352,27 @@ function question7()
 			choiceBtns.push(createBtns(correctChoices[i], true));
 		}
 	}
+	if(choiceBtns.length > 4)
+		choiceBtns.splice(4, choiceBtns.length -4);
 	for(var i = 0; i < 4; i++)
 	{
+		console.log(choiceBtns[i].value);
 		if(choiceBtns[i].value == "")
 		{
 			choiceBtns[i].setAttribute("value", correctChoices[i+4]);
 		}
 	}
 	shuffleArray(choiceBtns);
-	for(var i = 0; i < choiceBtns.length; i++)
-		document.getElementById("answerArea").appendChild(choiceBtns[i]);
+	for(var i = 0; i < 4; i++)
+	{
+		if(choiceBtns[i].value != "")
+		{
+			document.getElementById("answerArea").appendChild(choiceBtns[i]);
+		}
+		else
+			alert("wut");
+	}
+		
 	question7Arr = [];
 	prepQ7();
 	return splitted[0];
@@ -409,6 +423,8 @@ function prepQ1()
 				{
 					success: function(r)
 					{
+						if(r == undefined)
+							prepQ1();
 						question1Arr[question1Arr.length-1] += "|" + r.get("director");
 					},
 					error: function(err)
@@ -699,7 +715,7 @@ function prepQ5()
 			{
 				success: function(r)
 				{
-					if(r.length < 1)
+					if(r.length < 1 || r[0] == undefined)
 						prepQ5();
 					var queryStar = Parse.Object.extend("stars");
 					var starObj = new Parse.Query(queryStar);
@@ -929,7 +945,7 @@ function prepQ7()
 							var counter = 0;
 							for(var i =0; i < rr.length; i++)
 							{
-								if(counter > 3)
+								if(counter > 4)
 									break;
 								var simObj = new Parse.Query(querySIM);
 								simObj.notEqualTo("star_id", result.get("star_id"));
@@ -950,12 +966,14 @@ function prepQ7()
 												{
 													success:function(rrrr)
 													{
+														question7Arr[0] += "|" + rrrr.get("first_name") + " " + rrrr.get("last_name");
+														/*
 														if(rrrr.get("first_name") != undefined)
 															question7Arr[0] += rrrr.get("first_name") + " ";
 														if(rrrr.get("last_name") != undefined)
 															question7Arr[0] += rrrr.get("last_name");
-														question7Arr[0] += "|";
-														console.log("7: " + rrrr.get("first_name") + " " + rrrr.get("last_name"));
+														*/
+														//console.log("7: " + rrrr.get("first_name") + " " + rrrr.get("last_name"));
 													},
 													error: function(obj,err)
 													{
